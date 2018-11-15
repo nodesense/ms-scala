@@ -55,7 +55,6 @@ object CollectionExample  extends  App {
 
   println("Total Left ", totalLeft)
 
-
   val totalRight = numbers.foldRight(0) ( (n, acc) => {
     println("foldRight ", acc, n)
     acc + n
@@ -66,4 +65,24 @@ object CollectionExample  extends  App {
   val multi = numbers.fold(1) ( (acc, n) => acc * n);
   println("multi ", multi)
 
+  val sum: Double = numbers.reduce(_ + _)
+  println("Sum ", sum);
+  val sum1: Double = numbers.reduce((a, b) => a + b)
+  println("sum1 ", sum1);
+
+  println("Reduce min ", numbers.reduce(_ min _))
+
+  println("Reduce max ", numbers.reduce(_ max _))
+
+  val findMax = (x: Int, y: Int) => {
+    Thread.sleep(10)
+    val winner = x max y
+    println(s"compared $x to $y, $winner was larger")
+    winner
+  }
+
+  val a = Array.range(0,50)
+  println("reduce  ", a.par.reduce(findMax))
+  println("reduce Left ", a.par.reduceLeft(findMax))
+  println("reduce right  ", a.par.reduceRight(findMax))
 }
